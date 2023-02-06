@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About the Purelog Theme
+title: About the Blog Theme
 permalink: /about/
 ---
 
