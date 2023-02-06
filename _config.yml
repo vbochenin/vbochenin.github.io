@@ -1,10 +1,10 @@
-title: Java Dev Diary
+title: code4food
 email: vbochenin@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
+description: >- Java developer diary about tasks  I'm doing to get some food.
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://vbochenin.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-repository:
+repository: vbochenin.github.io
 twitter:
 github: vbochenin
 
@@ -14,10 +14,10 @@ header_image: assets/profile.png
 comments: false
 disqus:
 
-author:
-author_bio: >-
+author: Vladislav Bochenin
+author_bio: >- Writing code more than 16 years and raising a son last 7 years. So I have more experiance in coding than in rasing.
 
-author_pic:
+author_pic: assets/profile.png
 
 paginate: 5
 paginate_path: "/:num/"
