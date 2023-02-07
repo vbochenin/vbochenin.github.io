@@ -275,9 +275,13 @@ The plugin has a `showWeaveInfo` option to log all information about what and ho
 
 Once build is done, I may check logs
 
-```
-[INFO] Join point 'method-call(com.example.apects.Example$Value com.example.apects.Example.getValue())' in Type 'com.example.apects.Example' (Example.java:7) advised by around advice from 'com.example.apects.CachingAspect' (CachingAspect.java:22)
-[INFO] Join point 'method-execution(com.example.apects.Example$Value com.example.apects.Example.getValue())' in Type 'com.example.apects.Example' (Example.java:12) advised by around advice from 'com.example.apects.CachingAspect' (CachingAspect.java:22)
+``` bash
+[INFO] Join point 'method-call(com.example.apects.Example$Value com.example.apects.Example.getValue())'
+       in Type 'com.example.apects.Example' (Example.java:7) advised by around advice from 
+       'com.example.apects.CachingAspect' (CachingAspect.java:22)
+[INFO] Join point 'method-execution(com.example.apects.Example$Value com.example.apects.Example.getValue())'
+       in Type 'com.example.apects.Example' (Example.java:12) advised by around advice from 
+       'com.example.apects.CachingAspect' (CachingAspect.java:22)
 ```
 
 OK, here I may see that my join point was advised twice, so my code will also be called twice.
@@ -297,9 +301,10 @@ public Object checkCache(ProceedingJoinPoint pjp, Cacheable cacheable) throws Th
 ```
 
 Rebuild and check logs:
-```
-[INFO] Join point 'method-execution(com.example.apects.Example$Value com.example.apects.Example.getValue())' in Type 'com.example.apects.Example' (Example.java:12) advised by around advice from 'com.example.apects.CachingAspect' (CachingAspect.java:22)
-
+``` bash
+[INFO] Join point 'method-execution(com.example.apects.Example$Value com.example.apects.Example.getValue())' 
+       in Type 'com.example.apects.Example' (Example.java:12) advised by around advice from 
+       'com.example.apects.CachingAspect' (CachingAspect.java:22)
 ```
 
 
