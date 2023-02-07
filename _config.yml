@@ -11,8 +11,8 @@ github: vbochenin
 
 header_image: assets/profile.png
 
-# google_analytics: 1
-comments: false
+google_analytics: 1
+comments: 
 disqus:
 
 author: Vladislav Bochenin
