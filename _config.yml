@@ -5,14 +5,13 @@ description: >-
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://vbochenin.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-repository: vbochenin.github.io
-twitter:
+repository:  vbochenin/vbochenin.github.io 
 github: vbochenin
 
 header_image: assets/profile.png
 
 google_analytics: 1
-comments: 
+comments: true
 disqus:
 
 author: Vladislav Bochenin

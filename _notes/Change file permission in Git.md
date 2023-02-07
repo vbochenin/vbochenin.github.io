@@ -1,5 +1,5 @@
 ---
-title: "Git: change file permissions" 
+title: "Git: Change file permissions" 
 tags: 
     - git
 ---
