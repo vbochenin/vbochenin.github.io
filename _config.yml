@@ -1,6 +1,7 @@
 title: code4food
 email: vbochenin@gmail.com
-description: >- Java developer diary about tasks  I'm doing to get some food.
+description: >-
+  Java developer diary about tasks  I'm doing to get some food.
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://vbochenin.github.io" # the base hostname & protocol for your site, e.g. http://example.com
@@ -15,7 +16,8 @@ comments: false
 disqus:
 
 author: Vladislav Bochenin
-author_bio: >- Writing code more than 16 years and raising a son last 7 years. So I have more experiance in coding than in rasing.
+author_bio: >- 
+  Writing code more than 16 years and raising a son last 7 years. So I have more experiance in coding than in rasing.
 
 author_pic: assets/profile.png
 
