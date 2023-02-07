@@ -1,6 +1,13 @@
 ---
+title: "How to change already written code: Aspects"
 layout: post
 author: vbochenin
+tags:
+  - java
+  - aspects
+  - annotations
+categories:
+  - how-to
 ---
 ## What an issue I'm trying to solve
 Now I'm trying to solve some generic issue. We have a lot of idempotent methods, methods without side effects and returning the same result for the same arguments.
