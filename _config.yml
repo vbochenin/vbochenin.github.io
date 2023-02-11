@@ -5,7 +5,7 @@ description: >-
 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://vbochenin.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-repository:  vbochenin/vbochenin.github.io 
+repository:  vbochenin/code.vbochenin.github.io 
 github: vbochenin
 
 header_image: assets/profile.png

@@ -133,6 +133,6 @@ private static LongSupplier initAllocatedMemoryProvider() {
 
 You may get access to different runtime information with JMX, but you may find a treasure if you dig slightly deeper.
 
-You may find the code on [GitHub](https://github.com/vbochenin/code.vbochenin.github.io/tree/main/memory-usage). 
+_You may find the code on [GitHub](https://github.com/vbochenin/code.vbochenin.github.io/tree/main/memory-usage)._
 
 

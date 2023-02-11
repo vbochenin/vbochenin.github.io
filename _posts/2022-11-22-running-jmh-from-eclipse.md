@@ -205,5 +205,5 @@ Now it runs only methods we ask to run.
 Finally, we've got unified way to run benchmarks from any IDE during development and debugging. This is really simplify our daily life.
 We are still running the benchmarks  with `main` method to reduce environment noise and get reliable results for analysis.
 
-_You may find the code in [GitHub](https://github.com/vbochenin/benchmark-runner/tree/main)._ 
+_You may find the code in [GitHub](https://github.com/vbochenin/code.vbochenin.github.io/tree/main/benchmark-runner)._ 
 
