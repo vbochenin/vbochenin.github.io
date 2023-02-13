@@ -1,3 +1,13 @@
+---
+title: "3 way to know used memory"
+layout: post
+author: vbochenin
+tags:
+  - java
+  - jmx
+categories:
+  - how-to
+---
 # What task I would like to solve
 
 Recently I tried to know how much memory an application wastes during some operation.
