@@ -1,5 +1,5 @@
 ---
-title: "3 way to know used memory"
+title: "3 ways to know used memory"
 layout: post
 author: vbochenin
 tags:
