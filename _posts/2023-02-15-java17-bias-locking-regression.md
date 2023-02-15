@@ -27,7 +27,7 @@ Once I ran it, I found strange plateaus on a flame graph that was missing in the
 
 So I've decided to look closer into the method.
 
-# Investigation
+# Digging deeper
 
 The method looks like this:
 
