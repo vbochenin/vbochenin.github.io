@@ -16,7 +16,7 @@ And this happens just by switching runtime.
 
 So I've got to investigate why the tests failed and fix the issue.
 
-# Reproduсtion phase
+# What I did to get some data
 
 First, I've decided to run the test with a profiler. I'm using [Intellij IDEA Profiler](https://www.jetbrains.com/help/idea/profiler-intro.html) with the default settings for the smoke test.
 Once I ran it, I found strange plateaus on a flame graph that was missing in the java 11 profiling report.
