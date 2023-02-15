@@ -107,12 +107,12 @@ public class LazyInputStream extends InputStream {
 The memoizing supplier uses a 2-fields variant of double-checked locking, but it is because the supplier may return `null` as a valid value.
 ```
 public T get() {  
-  if (!initialized) { // boolean flag  
+  if (!initialized) {          // boolean flag  
     synchronized (this) {  
-      if (!initialized) {  // double check to avoid races
+      if (!initialized) {      // double check to avoid races
         T t = delegate.get();  // calling delegate to get a value
-        value = t;   // and remember it
-        initialized = true;  // rise the boolean flag
+        value = t;             // and remember it
+        initialized = true;    // rise the boolean flag
         return t;  
       }  
     }  
@@ -126,6 +126,6 @@ Finally, we decided to go with turned-on bias locks and continue working on our 
 
 # Conclusion
 
-You may get some performance boost only by turning on bias locks if you have something similar to us and using java 15+.
-But it is always better to rewrite problem pieces.
-Test your code performance in every java version. It will help you find regression earlier and only spend a little time looking into strange plateaus.
+- You may get some performance boost only by turning on bias locks if you have something similar to us and using java 15+.
+  But it is always better to rewrite problem pieces.
+- Test your code performance in every java version. It will help you find regression earlier and only spend a little time looking into strange plateaus.

@@ -263,6 +263,7 @@ DEPENDENCIES
   jekyll-feed (~> 0.12)
   jekyll-paginate
   jekyll-seo-tag
+  jekyll-sitemap
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)
