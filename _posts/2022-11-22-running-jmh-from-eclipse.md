@@ -18,9 +18,9 @@ The tool provides multiple modes and profilers, and we found this useful for our
 Intellij IDEA, which I'm using, has a useful [Intellij IDEA plugin for Java Microbenchmark Harness](https://github.com/artyushov/idea-jmh-plugin). The plugin's functionality is similar to JUnit Plugin. It simplifies benchmarks development and debugging by allowing running some benchmarks together or separately.
 
 But... half of our team uses Eclipse as a major IDE and the IDE does not have any plugins or support for the tool.
-Even if we may run it with the `main` method, it is inconvenient to change the `include` pattern and do not forget to revert the changes before committing them into git.
+Even if we can run it with the `main` method, it is inconvenient to change the `include` pattern and do not to forget to revert the changes before committing them into git.
 
-So, after small brainstorming, we decided to write a custom JUnit Runner with functionality to run benchmark.
+So, after a bit of brainstorming, we decided to write a custom JUnit Runner with functionality to run a benchmark.
 
 ## JUnit 4 runners 
 
@@ -202,8 +202,7 @@ Now it runs only methods we ask to run.
 
 ## Conclusion
 
-Finally, we've got unified way to run benchmarks from any IDE during development and debugging. This is really simplify our daily life.
-We are still running the benchmarks  with `main` method to reduce environment noise and get reliable results for analysis.
+Finally, we've got a unified way to run benchmarks from any IDE during development and debugging. This really simplifies our daily life. We still run the benchmarks using the main method to reduce environmental noise and get reliable results for analysis.
 
 _You may find the code in [GitHub](https://github.com/vbochenin/code.vbochenin.github.io/tree/main/benchmark-runner)._ 
 

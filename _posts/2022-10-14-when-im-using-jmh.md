@@ -10,21 +10,21 @@ categories:
   - dev-journal
 ---
 ## What an issue I've tried to solve
-My task was to investigate the reason why typed enumeration occupies 13 Mb per instance in a customer environment. The typed enumeration is a domain object allowing to users configure enumeration type for custom fields.
-The use case is reproducible once enumeration has around 1k elements.
+My task was to investigate why a typed enumeration was taking up 13MB per instance in a customer environment. The typed enumeration is a domain object that allows users to configure the enumeration type for custom fields.
+The use case is reproducible once the enumeration has about 1k elements.
 
-So I may assume the following possible causes:
+So I can assume the following possible causes
 - a memory leak
-	- keeping in memory some stale caches values 
-- storing big files in memory
-	- the enumeration is uploaded by user as XML file, so some intermediate big object can be cached 
-- duplicating of data (if so, then why?). 
-	- multiple copies of same data sorted in cache for different keys 
+	- keeping some outdated cache values in memory 
+- storing large files in memory
+	- the user uploads the enumeration as an XML file, so some large intermediate objects can be cached 
+- duplication of data (if so, why?) 
+	- multiple copies of the same data cached for different keys
 
 ## What I did to find the cause
 
-First, I've rerun the scenario locally, made a heap dump, and analyzed it with [MemoryAnalizer](https://www.eclipse.org/mat/). 
-It is visible from the report below (_Histogram -> Choose TypedEnumeration in filter -> List of object with outgoing reference -> Sort by Retained Heap_), that we are storing duplicated data for each key in `control2Options` field.
+First, I've re-run the scenario locally, taken a heap dump, and analyzed it with [MemoryAnalizer](https://www.eclipse.org/mat/). 
+From the report below (_Histogram -> Choose TypedEnumeration in filter -> List of objects with outgoing reference -> Sort by Retained Heap_), we are storing duplicate data for each key in the `control2Options` field.
 
 ```
 Class Name                                                              | Shallow Heap | Retained Heap
@@ -75,22 +75,22 @@ TypedEnumeration @ 0xe0064a60                                           |       
 ```
 
 
-Lets  rerun the scenario with the profiler turned on.
-I've used [JMC](https://jdk.java.net/jmc/8/) and [Flight Records](https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170), and it showed me that the application occupies the extra memory during bootstrap.
+Let us re-run the scenario with the profiler enabled.
+I've used [JMC](https://jdk.java.net/jmc/8/) and [Flight Records](https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170), and it showed me that the application is using the extra memory during bootstrap.
 
 
 ![Memory allocations](/assets/img/posts/2022-10-14-when-im-using-jmh/heap-allocations.png)
 
-Not exactly the place, but it reduced the scope significantly and after some code investigation, I found where the application is wasting memory.
+Not exactly the right place, but it reduced the size considerably, and after some code examination, I found where the application was wasting memory.
 
-Success? Nope, I still need to fix the issue and prove that our fix is fixing something.
+Success? No, I still need to fix the problem and prove that our fix fixes something.
 
-This is where [JMH](https://github.com/openjdk/jmh) is coming to the stage.
+This is where [JMH](https://github.com/openjdk/jmh) comes in.
 
 ## What we can do with the tool 
 
-JMH is a microbenchmark framework for Java. 
-It cares about memory alignments, method inlines, warmups, and all other stuff that makes benchmarks hard to write.
+JMH is a micro-benchmarking framework for Java. 
+It takes care of memory alignments, method inlines, warmups, and all the other stuff that makes benchmarks hard to write.
 It also has multiple profilers you may use in your benchmarks.
 
 ```
@@ -118,20 +118,21 @@ It also has multiple profilers you may use in your benchmarks.
 
 One I've used is `GCProfiler`. 
 The profiler calculates memory allocations and garbage collections during benchmark execution.
-Statistics it shows, I'm interested in, is `gc.alloc.rate (MB/sec)` and `gc.alloc.rate.norm (B/op)` 
+The statistics it shows that I'm interested in are `gc.alloc.rate (MB/sec)` and `gc.alloc.rate.norm (B/op)`. 
 `gc.alloc.rate` shows how much memory the benchmark occupies during the trial, but `gc.alloc.rate.norm` is about how much memory was allocated during single benchmark execution.
 
-Having investigation results in mind, I may assume that less memory the application allocated, less GC pressure and less data application is storing in cache. 
+With the results of the investigation in mind, I can assume that the less memory the application allocates, the less GC pressure and the fewer data the application caches. 
 
-Warning: the assumption is fair only for the issue above because the investigation showed application is duplicating data it may never use.
+Warning: this assumption is only fair for the above issue because the investigation showed that the application duplicates data it may never use.
 
-So I've ended up with the following plan:
+So I've come up with the following plan:
 - write benchmarks for suspicious methods 
 - run benchmarks with GCProfiler and get some numbers
-- improve code or fix the issue
+- improve the code or fix the problem
 - run the benchmark again 
-- analyze numbers
-- repeat until successful 
+- analyze the numbers
+- repeat until successful
+
 
 ``` java
 public class TypeEnumerationAllocationBenchmark {  

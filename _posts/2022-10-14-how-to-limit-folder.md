@@ -11,25 +11,25 @@ categories:
 ## What an issue I've got
 
 Today I've got a task to test (and fix) how the application behaves during a backup when it does not have a space on the device.
-As result, there shouldn't be any new files once the backup is failed with "no space left" error.
+As a result, there shouldn't be any new files when the backup fails with a "no space left" error.
 
 ## How did I investigate the issue
 
-So far, I see the following options for how to reproduce the issue:
-- to have enormous application data to backup, either on some shared machine or generate the content locally
-- to create a limited-size directory and try to write a backup there
+So far, I see the following options for reproducing the problem:
+- to have huge application data to back up, either on a shared machine or generate the content locally
+- to create a directory of limited size and try to write a backup to it.
 
-First is time-consuming to reproduce it locally, so let's start with creating limited-size directories.
+The first is time-consuming to reproduce locally, so let's start by creating limited-size directories.
 
 I have two target environments for testing: Windows 10 and Debian-based Linux.
-I've chosen Ubuntu 18.04 because I have the VM already installed.
+I've chosen Ubuntu 18.04 because I already have the VM installed.
 
-So, let's make a backup for the newly installed application and check its size.
-And empty backup is 8.5Mb. It is suspicious the app has an 8Mb backup from scratch, and I will write it down to fix later, but I have another issue so far.
+So let's backup the newly installed application and check its size.
+And the empty backup is 8.5Mb. It is suspicious that the application has an 8Mb backup from scratch, and I will write it down to fix it later, but I have another problem so far.
 
 ### Windows
 
-I haven't found a way to create a limited-size directory on Windows, but I can create a limited-size virtual disk and use it for my purposes.
+I have yet to find a way to create a limited-size directory in Windows. However, I can make a limited-size virtual hard disk and use it.
 
 1.  Go to Disk management
 
@@ -37,7 +37,7 @@ I haven't found a way to create a limited-size directory on Windows, but I can c
 
     ![Create VHD](assets/img/posts/2022-10-14-how-to-limit-folder/windows-step-2.png)
 
-3.  Choose Virtual Disk file location and set disk size. For my pupose I need 10Mb (8Mb for backup plus some extra for partitions and system information) and I need "Fixed size".  
+3.  Choose Virtual Disk file location and set disk size. For my purpose, I need 10Mb (8Mb for backup plus some extra for partitions and system information), and I need "Fixed size."  
     ![Choose virtual disk file](assets/img/posts/2022-10-14-how-to-limit-folder/windows-step-3.png)
 
 4.  Initialize the new disk (choose Master Boot Record)
@@ -102,4 +102,4 @@ But... it is enough for my purposes
     /dev/loop1      8.3M   14K  7.5M   1% /home/vbochenin/10mbup
 ```
 
-Once limited size directories created, I may specify them as backup target direcotry and run the same empty backup.
+Once the limited-size directories are created, I can specify them as the backup target directory and run the same empty backup.
