@@ -10,14 +10,14 @@ categories:
   - how-to
 ---
 ## What an issue I'm trying to solve
-Now I'm trying to solve some generic issue. We have a lot of idempotent methods, methods without side effects and returning the same result for the same arguments.
-Additionally, we have some methods of reading data outside, but the data are rarely changed.
+Now I'm trying to solve a general problem. We have a lot of idempotent methods, methods that have no side effects and return the same result for the same arguments.
+In addition, we have some methods that read data from somewhere else, but the data is rarely changed.
 
-We may use, and we are using, caching to improve response time in this case. 
-The issue is that all these methods are different, as well as the ways we are using caches (from local value holders and hash maps to EhCache).
-So we would like to unify a caching approach to be able to configure different caches, their eviction, and capacity policies and ways how we store them.
+We can, and do, use caching to improve response time in this case. 
+The problem is that all these methods are different, as are the ways we use caches (from local value holders to hash maps to EhCache).
+So we would like to unify a caching approach to be able to configure different caches, their eviction and capacity policies, and the way we store them.
 
-Also, I wouldn't like to pollute the business code with extra supporting code.
+Also, I don't want to overload the business code with extra support code.
 
 Please compare without cache:
 
@@ -44,7 +44,7 @@ public Value get() {
 
 ## Changes I've made before 
 
-First, I've unified caching interface and replaced it in already-known places:
+First, I've unified the caching interface and replaced it in places already known:
 
 ``` java
 public interface Cache<K, V> {

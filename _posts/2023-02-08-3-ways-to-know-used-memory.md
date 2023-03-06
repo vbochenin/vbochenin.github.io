@@ -9,19 +9,18 @@ categories:
   - how-to
 ---
 # What task I would like to solve
+Recently, I was trying to find out how much memory an application uses during a particular operation.
+The operation I want to measure is the creation of data snapshots.
+The application stores a sequence of operations on objects and periodically creates object snapshots. 
+So if we want to know the object's state at a given point in time, we don't replay all the operations from the beginning to that point. We get the object's state from the closest snapshot and replay only a limited number of operations from that snapshot to our point in time.
 
-Recently I tried to know how much memory an application wastes during some operation.
-The operation I want to measure is data snapshot creation.
-The application stores a sequence of operations with objects and periodically creates object snapshots. 
-So if we want to know the object's state at any point in time, we won't replay all operations from the beginning to this point but get the object's state from the nearest snapshot and play only a limited amount of operation from this snapshot to our point.
+Obviously, we would like to store as many recent snapshots as possible in a heap, but in the real world, we have limited memory. We should limit the amount of memory for snapshots, and we traditionally do this by setting the threshold in the application properties.
 
-Obviously, we would like to store as many recent snapshots as possible in heap memory, but in the real world, we have limited memory. We should limit the amount of memory for snapshots, and we are doing it traditionally by setting the threshold via application properties.
+The next step is to provide some meaningful defaults for this property. 
+The problem is that we cannot predict the value because different customers have different environments, data, snapshot sizes, etc. 
+This means we need more data to make a decision.
 
-Next step, we want to provide some meaningful defaults for this property. 
-The issue here is that we cannot predict the value because different customers have different: environments, data, sizes of snapshots, and so on. 
-This means we need to have more data to make a decision.
-
-Finally, we decided to log how much heap was occupied before and after snapshot creation and end with something like this:
+Finally, we decided to log how much heap was used before and after the snapshot was taken and ended up with something like this:
 
 ```
 public Snapshot buildSnapshot() {
@@ -36,19 +35,19 @@ public Snapshot buildSnapshot() {
 
 # `java.lang.Runtime` way
 
-If you google "java used memory in runtime" you will see this method: `Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()` and different variations over it.
+If you google "java used memory in runtime" you will see this method: `Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()` and several variations of it.
 
-Let's look closer at what this method returns to us.
+Let's have a closer look at what this method returns.
 
 For total memory:
-> Returns the total amount of memory in the Java virtual machine. The value returned by this method may vary over time, depending on the host environment.
+> Returns the total amount of memory in the Java Virtual Machine. The value returned by this method may vary over time depending on the host environment.
 
 For free memory:
-> Returns the amount of free memory in the Java Virtual Machine. Calling the gc method may result in increasing the value returned by freeMemory.
+> Returns the amount of free memory in the Java Virtual Machine. Calling the gc method may result in an increase in the value returned by freeMemory.
 
-In other words, total memory may contain references no longer needed objects. The object will be freed after garbage collection, but we don't have any control over GC and don't know when it is executed.
+In other words, the total memory may contain references to no longer-needed objects. The object will be freed after garbage collection, but we have no control over GC and don't know when it will be executed.
 
-So we need to find some better solution.
+So we have to find something better.
 
 # JMX way
 
