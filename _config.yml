@@ -46,20 +46,12 @@ defaults:
     values:
       layout: "post"
       author:
-      avatar: assets/profile-sm.png
   - scope:
       path: ""
       type: notes
     values:
       layout: post
       content-type: notes
-      avatar: assets/profile-sm.png
-  - scope:
-      path: ""
-      type: journals
-    values:
-      layout: journal-entry
-      content-type: journals
 
 # Allows all pages to be put into `_pages` folder
 # for easier navigation and better SEO.
@@ -70,9 +62,6 @@ collections:
   notes:
     output: true
     permalink: /notes/:title
-  journals:
-    output: true
-    permalink: /journals/:title
 
 # Exclude from processing.
 exclude:

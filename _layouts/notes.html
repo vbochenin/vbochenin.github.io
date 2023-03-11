@@ -32,7 +32,11 @@ layout: default
 
                 <div class="post-description">
                     <p>
-                        <em>{{ note.content | strip_html | escape | truncate: 300}}</em>
+                        {% if note.description %}
+                            <em>{{ note.description | strip_html | escape | truncate: 300}}</em>
+                        {% else %}
+                            <em>{{ note.content | strip_html | escape | truncate: 300}}</em>
+                        {% endif %}
                     </p>
                 </div>
             </section>
