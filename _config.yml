@@ -46,13 +46,15 @@ defaults:
     values:
       layout: "post"
       author:
+      avatar: assets/profile-sm.png
   - scope:
       path: ""
       type: notes
     values:
       layout: post
       content-type: notes
-
+      avatar: assets/profile-sm.png
+      
 # Allows all pages to be put into `_pages` folder
 # for easier navigation and better SEO.
 collections:
