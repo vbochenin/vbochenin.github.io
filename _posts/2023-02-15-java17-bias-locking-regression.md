@@ -21,7 +21,7 @@ So I've got to investigate why the tests failed and fix the issue.
 First, I've decided to run the test with a profiler. I'm using [Intellij IDEA Profiler](https://www.jetbrains.com/help/idea/profiler-intro.html) with the default settings for the smoke test.
 After running it, I found strange plateaus on a flame graph that were missing from the Java 11 profiling report.
 
-![Plateaus](assets/img/posts/2023-02-15-java17-bias-locking-regression/plateau.png)
+![Plateaus](assets/img/posts/2023-02-15-plateau.png)
 
 
 So I've decided to look closer into the method.
