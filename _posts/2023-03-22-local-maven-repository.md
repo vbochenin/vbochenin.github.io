@@ -110,4 +110,4 @@ But nobody said that the folder must always be in `$USER_HOME/.m2/repository`. W
 
 So, with some extra work in the begining, we've got:
 - cleaner dependency specification;
-- no coupling between the build script and the filesystem.`
+- no coupling between the build script and the filesystem.
