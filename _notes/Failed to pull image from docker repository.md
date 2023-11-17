@@ -12,4 +12,4 @@ description: "[setup permissions](https://everythingtech.dev/2022/09/how-to-fix-
 
 **Solution:** For login generate Git hub token with “read:packages” permission
 
-https://everythingtech.dev/2022/09/how-to-fix-docker-unauthorized-from-pulling-from-github-private-packages-ghcr-io
+[link](https://everythingtech.dev/2022/09/how-to-fix-docker-unauthorized-from-pulling-from-github-private-packages-ghcr-io)
