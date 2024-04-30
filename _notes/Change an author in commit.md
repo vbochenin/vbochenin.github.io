@@ -10,7 +10,7 @@ description: 'git commit --amend --author="new-author-name new-author@email.com"
 2. Mark required commits to edit (e)
 3. Repeat required times
    ```bash
-	git commit --amend --author="<new author name> <new-author@email.com>" --no-edit
+   git commit --amend --author="<new author name> <new-author@email.com>" --no-edit
    git rebase --continue
    ```
 4. Check if everything is ok
