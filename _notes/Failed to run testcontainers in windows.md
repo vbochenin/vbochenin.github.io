@@ -5,7 +5,7 @@ tags:
     - testcontainers
 categories:
     - how-to
-description: "bundle exec jekyll serve --livereload"
+description: "TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal"
 ---
 **Description:** failed to map docksock file with  docker on windows
 
